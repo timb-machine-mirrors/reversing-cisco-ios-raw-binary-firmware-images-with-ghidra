@@ -77,6 +77,8 @@ Now open the `70` binary blob in ghidra.  Again, since there is no standardized 
 
 Ghidra will then churn on the binary for a while, and when it is done the strings should be resolved to labels within the decompiler. This is because the label regions in memory are marked as Read/Write within ghidra. We want to resolve those labels to strings for ease of use.
 
+![Ghidra Decompiler Output with Labes](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/71968514689b2b9ebf6a9f82e12e27aa57bfb0a0/03-ghidra-decompiler-with-labels.png)
+
 Open up `Window->Memory Map` and click the `Split` button up in the right hand corner of that screen.  You will need to split at the data-base address `0x02f00000`, and then mark the data-base memory region as Read Only.  
 
 After you have completed these steps, the labels should resolve to strings and you should be able to start reversing the image quite easily.
