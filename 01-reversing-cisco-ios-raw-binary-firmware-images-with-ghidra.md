@@ -79,9 +79,16 @@ Ghidra will then churn on the binary for a while, and when it is done the string
 
 ![Ghidra Decompiler Output with Labes](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/71968514689b2b9ebf6a9f82e12e27aa57bfb0a0/03-ghidra-decompiler-with-labels.png)
 
+Navigate to the data-base address of `0x02f00000 - 0x01000000` in Ghidra.  This last portion of the blob is where all the strings that are referenced in code live.  The actual location where these strings start is a little lower than `0x02f00000 - 0x01000000`, we will need to manually inspect the binary to see just where that location is.  This is most likely due to some sort of offset within text-base that I am simply not aware of.  I came up with the location `DAT_02de33d8` (`0x02de33d8`).  We arent necessarily looking for an exact location.
+
+![Ghidra Memory Map Default](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/2a2f8d79c176a22dc10333bf951497a888e25633/04-ghidra-memory-map-default.png)
+
 Open up `Window->Memory Map` and click the `Split` button up in the right hand corner of that screen.  You will need to split at the data-base address `0x02f00000`, and then mark the data-base memory region as Read Only.  
 
-![Ghidra Memory Map Default Configuration Menu](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/88e7f4399723e82c7ec74529d04def7e889c40eb/04-ghidra-memory-map-default.png)
+![Ghidra Memory Map Default Configuration Menu](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/f50c6488e7414390041b06d68ff14ff4ddf399dc/05-ghidra-memory-map-split.png)
+
+![Ghidra Memory Map Split](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/f50c6488e7414390041b06d68ff14ff4ddf399dc/06-ghidra-memory-map-readonly.png
 
 After you have completed these steps, the labels should resolve to strings and you should be able to start reversing the image quite easily.
 
+![Ghidra decompiler with strings resolved](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/f50c6488e7414390041b06d68ff14ff4ddf399dc/07-ghidra-decompiler-with-strings-resolved.png)
