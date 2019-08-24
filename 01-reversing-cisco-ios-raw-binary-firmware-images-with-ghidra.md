@@ -81,5 +81,7 @@ Ghidra will then churn on the binary for a while, and when it is done the string
 
 Open up `Window->Memory Map` and click the `Split` button up in the right hand corner of that screen.  You will need to split at the data-base address `0x02f00000`, and then mark the data-base memory region as Read Only.  
 
+![Ghidra Memory Map Default Configuration Menu](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/88e7f4399723e82c7ec74529d04def7e889c40eb/04-ghidra-memory-map-default.png)
+
 After you have completed these steps, the labels should resolve to strings and you should be able to start reversing the image quite easily.
 
