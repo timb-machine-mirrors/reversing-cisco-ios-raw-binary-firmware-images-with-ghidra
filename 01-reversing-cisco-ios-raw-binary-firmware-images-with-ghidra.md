@@ -1,3 +1,9 @@
+# Reversing Raw Binary Firmware Files in Ghidra
+
+This brief tutorial will show you how to go about analyzing a raw binary firmware image in Ghidra.
+
+## Prep work in Binwalk
+
 I was recently interested in reversing some older Cisco IOS images.  Those images come in the form of a single binary blob, without any sort of ELF, Mach-o, or PE header to describe the binary.
 
 While I am using Cisco IOS Images in this example, the same process should apply to other Raw Binary Firmware Images.
@@ -6,7 +12,7 @@ That makes importing this type of firmware file difficult, as Ghidra doesn't hav
 
 The following are a few things I learned while trying to get the Cisco IOS image in a reversible state within Ghidra.
 
-First I had to extract the image.  The first 112 bytes of the firmware I received from the vendor are some sort of Cisco proprietary header that is not useful for our purpose.  We need to extract the bzip2 archive that we are interested in.  The easist way to do that is binwalk:
+First I had to extract the image. I pulled the firmware image off a switch I recently bought over TFTP.  It turns out the first 112 bytes are some sort of Cisco proprietary header that is not useful for our purpose.  We need to extract the bzip2 archive that we are interested in.  The easist way to do that is binwalk:
 ```
 binwalk -eM c3750-ipservicesk9-mz.122-50.SE3.bin
 ```
@@ -63,6 +69,8 @@ BOOTLDR: C3750 Boot Loader (C3750-HBOOT-M) Version 12.2(44)SE5, RELEASE SOFTWARE
 This dumps out a line: `Image text-base: 0x01000000, data-base: 0x02F00000`.  
 Both of those addresses are important, so note them and save them for later.
 
+# Ghidra Time
+
 Now open the `70` binary blob in ghidra.  Again, since there is no standardized binary format for the binary, you will have to import the file as `Raw Binary`, and then set the Code Architecture to `PowerPC Big Endian 4xx`.  Also, click the options button and set the image offset base to the value we retrieve from the `show version` command: 0x01000000.  Then import.
 
 ![Ghidra File Import Options Screenshot](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/e580a6464ce787b20ce3442490a3cc5f647a6a98/ghidra-import-file-options.png)
@@ -72,3 +80,4 @@ Ghidra will then churn on the binary for a while, and when it is done the string
 Open up `Window->Memory Map` and click the `Split` button up in the right hand corner of that screen.  You will need to split at the data-base address `0x02f00000`, and then mark the data-base memory region as Read Only.  
 
 After you have completed these steps, the labels should resolve to strings and you should be able to start reversing the image quite easily.
+
