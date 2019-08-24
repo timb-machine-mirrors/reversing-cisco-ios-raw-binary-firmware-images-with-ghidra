@@ -65,6 +65,8 @@ Both of those addresses are important, so note them and save them for later.
 
 Now open the `70` binary blob in ghidra.  Again, since there is no standardized binary format for the binary, you will have to import the file as `Raw Binary`, and then set the Code Architecture to `PowerPC Big Endian 4xx`.  Also, click the options button and set the image offset base to the value we retrieve from the `show version` command: 0x01000000.  Then import.
 
+![Ghidra File Import Options Screenshot](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/e580a6464ce787b20ce3442490a3cc5f647a6a98/ghidra-import-file-options.png)
+
 Ghidra will then churn on the binary for a while, and when it is done the strings should be resolved to labels within the decompiler. This is because the label regions in memory are marked as Read/Write within ghidra. We want to resolve those labels to strings for ease of use.
 
 Open up `Window->Memory Map` and click the `Split` button up in the right hand corner of that screen.  You will need to split at the data-base address `0x02f00000`, and then mark the data-base memory region as Read Only.  
