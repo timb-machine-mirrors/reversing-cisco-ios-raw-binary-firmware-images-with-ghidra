@@ -87,7 +87,7 @@ Open up `Window->Memory Map` and click the `Split` button up in the right hand c
 
 ![Ghidra Memory Map Default Configuration Menu](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/f50c6488e7414390041b06d68ff14ff4ddf399dc/05-ghidra-memory-map-split.png)
 
-![Ghidra Memory Map Split](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/f50c6488e7414390041b06d68ff14ff4ddf399dc/06-ghidra-memory-map-readonly.png
+![Ghidra Memory Map Split](https://gist.github.com/nstarke/ed0aba2c882b8b3078747a567ee00520/raw/f50c6488e7414390041b06d68ff14ff4ddf399dc/06-ghidra-memory-map-readonly.png)
 
 After you have completed these steps, the labels should resolve to strings and you should be able to start reversing the image quite easily.
 
